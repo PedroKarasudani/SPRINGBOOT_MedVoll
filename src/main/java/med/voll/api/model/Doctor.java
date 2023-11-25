@@ -12,16 +12,16 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import med.voll.api.dto.address.Address;
+import med.voll.api.dto.doctor.RegistrationDataDoctor;
 import med.voll.api.dto.doctor.Specialty;
 
-@Table(name = "medicos")
-@Entity(name = "Medicos")
+@Table(name = "doctors")
+@Entity(name = "Doctors")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Medico {
+public class Doctor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,4 +35,14 @@ public class Medico {
 
     @Embedded
     private Address address;
+
+    public Doctor(RegistrationDataDoctor data) {
+        this.name = data.name();
+        this.email = data.email();
+        this.crm = data.crm();
+        this.specialty = data.specialty();
+        this.address = new Address(data.address());
+
+    }
+
 }
