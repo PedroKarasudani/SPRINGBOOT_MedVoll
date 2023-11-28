@@ -10,6 +10,7 @@ import med.voll.api.dto.address.AddressData;
 public record RegistrationDataDoctor(
         @NotBlank String name,
         @NotBlank @Email String email,
+        @NotBlank String phone,
         @NotBlank @Pattern(regexp = "\\d{4,6}") String crm,
         @NotNull Specialty specialty,
         @NotNull @Valid AddressData address) {
