@@ -29,4 +29,28 @@ public class Address {
         this.complement = address.complement();
     }
 
+    public void updateData(AddressData data) {
+        if (data.publicPlace() != null) {
+            this.publicPlace = data.publicPlace();
+        }
+        if (data.publicPlace() != null) {
+            this.neighborhood = data.neighborhood();
+        }
+        if (data.publicPlace() != null) {
+            this.cep = data.cep();
+        }
+        if (data.publicPlace() != null) {
+            this.city = data.city();
+        }
+        if (data.publicPlace() != null) {
+            this.uf = data.uf();
+        }
+        if (data.publicPlace() != null) {
+            this.number = data.number();
+        }
+        if (data.publicPlace() != null) {
+            this.complement = data.complement();
+        }
+    }
+
 }

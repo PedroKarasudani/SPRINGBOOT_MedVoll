@@ -14,6 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import med.voll.api.dto.doctor.RegistrationDataDoctor;
 import med.voll.api.dto.doctor.Specialty;
+import med.voll.api.dto.doctor.UpdateDataDoctor;
 
 @Table(name = "doctors")
 @Entity(name = "Doctors")
@@ -45,6 +46,18 @@ public class Doctor {
         this.specialty = data.specialty();
         this.address = new Address(data.address());
 
+    }
+
+    public void updateData(UpdateDataDoctor data) {
+        if (data.name() != null) {
+            this.name = data.name();
+        }
+        if (data.phone() != null) {
+            this.phone = data.phone();
+        }
+        if (data.address() != null) {
+            this.address.updateData(data.address());
+        }
     }
 
 }
