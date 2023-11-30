@@ -7,6 +7,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,5 +35,11 @@ public class DoctorController {
     @GetMapping
     public Page<ListDateDoctors> list(@PageableDefault(size = 10, sort = { "name" }) Pageable pagination) {
         return doctorRepository.findAll(pagination).map(ListDateDoctors::new);
+    }
+
+    @PutMapping
+    @Transactional
+    public void update(@RequestBody @Valid RegistrationDataDoctor data) {
+
     }
 }
