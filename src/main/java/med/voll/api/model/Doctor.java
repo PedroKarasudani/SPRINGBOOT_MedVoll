@@ -38,6 +38,8 @@ public class Doctor {
     @Embedded
     private Address address;
 
+    private Boolean active;
+
     public Doctor(RegistrationDataDoctor data) {
         this.name = data.name();
         this.email = data.email();
@@ -45,7 +47,7 @@ public class Doctor {
         this.crm = data.crm();
         this.specialty = data.specialty();
         this.address = new Address(data.address());
-
+        this.active = true;
     }
 
     public void updateData(UpdateDataDoctor data) {
@@ -58,6 +60,10 @@ public class Doctor {
         if (data.address() != null) {
             this.address.updateData(data.address());
         }
+    }
+
+    public void delete() {
+        this.active = false;
     }
 
 }
