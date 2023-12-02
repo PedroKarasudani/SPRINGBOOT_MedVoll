@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import jakarta.validation.Valid;
 import med.voll.api.dto.doctor.ListDateDoctors;
@@ -32,9 +33,13 @@ public class DoctorController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity register(@RequestBody @Valid RegistrationDataDoctor data) {
-        doctorRepository.save(new Doctor(data));
+    public ResponseEntity register(@RequestBody @Valid RegistrationDataDoctor data, UriComponentsBuilder uriBuilder) {
+        var doctor = new Doctor(data);
+        doctorRepository.save(doctor);
 
+        var uri = uriBuilder.path("/doctors/{id}").buildAndExpand(doctor.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new DetailDataDoctor(doctor));
     }
 
     @GetMapping
