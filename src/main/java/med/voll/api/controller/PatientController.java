@@ -8,16 +8,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import jakarta.validation.Valid;
-import med.voll.api.dto.doctor.ListDateDoctors;
 import med.voll.api.dto.patient.DetailDataPatient;
 import med.voll.api.dto.patient.ListDatePatients;
 import med.voll.api.dto.patient.RegistrationDataPatient;
+import med.voll.api.dto.patient.UpdateDataPatient;
 import med.voll.api.model.Patient;
 import med.voll.api.repository.PatientRepository;
 
@@ -45,6 +46,15 @@ public class PatientController {
         var page = patientRepository.findAllByActiveTrue(pagination).map(ListDatePatients::new);
 
         return ResponseEntity.ok(page);
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity update(@RequestBody @Valid UpdateDataPatient data) {
+        var patient = patientRepository.getReferenceById(data.id());
+        patient.updateData(data);
+
+        return ResponseEntity.ok(new DetailDataPatient(patient));
     }
 
 }

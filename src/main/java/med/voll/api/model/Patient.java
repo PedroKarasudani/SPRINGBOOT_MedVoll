@@ -10,8 +10,8 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import med.voll.api.dto.doctor.UpdateDataDoctor;
 import med.voll.api.dto.patient.RegistrationDataPatient;
+import med.voll.api.dto.patient.UpdateDataPatient;
 
 @Table(name = "patients")
 @Entity(name = "Patients")
@@ -43,7 +43,7 @@ public class Patient {
         this.active = true;
     }
 
-    public void updateData(UpdateDataDoctor data) {
+    public void updateData(UpdateDataPatient data) {
         if (data.name() != null) {
             this.name = data.name();
         }
