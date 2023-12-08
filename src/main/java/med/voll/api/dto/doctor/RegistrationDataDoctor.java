@@ -8,11 +8,11 @@ import jakarta.validation.constraints.Pattern;
 import med.voll.api.dto.address.AddressData;
 
 public record RegistrationDataDoctor(
-        @NotBlank String name,
-        @NotBlank @Email String email,
-        @NotBlank String phone,
-        @NotBlank @Pattern(regexp = "\\d{4,6}") String crm,
-        @NotNull Specialty specialty,
-        @NotNull @Valid AddressData address) {
+                @NotBlank(message = "name is mandatory") String name,
+                @NotBlank @Email String email,
+                @NotBlank String phone,
+                @NotBlank @Pattern(regexp = "\\d{4,6}") String crm,
+                @NotNull Specialty specialty,
+                @NotNull @Valid AddressData address) {
 
 }
