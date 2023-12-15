@@ -1,4 +1,4 @@
-package med.voll.api.dto.Authentication;
+package med.voll.api.dto.authentication;
 
 public record DataAuthentication(String login, String password) {
 
