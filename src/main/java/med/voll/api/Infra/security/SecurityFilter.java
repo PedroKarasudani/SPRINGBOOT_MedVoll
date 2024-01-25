@@ -3,6 +3,8 @@ package med.voll.api.Infra.security;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -11,6 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import med.voll.api.Service.TokenService;
+import med.voll.api.repository.UserRepository;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter{
@@ -18,21 +21,32 @@ public class SecurityFilter extends OncePerRequestFilter{
   @Autowired
   private TokenService tokenService;
 
+  @Autowired
+  private UserRepository repository;
+
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
     var tokenJWT = recuperarToken(request);
-    var subject = tokenService.getSubject(tokenJWT);
+
+    if (tokenJWT!= null){
+      var subject = tokenService.getSubject(tokenJWT);
+      var user = repository.findByLogin(subject);
+
+      var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+
+      SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
 
     filterChain.doFilter(request, response);
   }
 
   private String recuperarToken(HttpServletRequest request) {
     var authorizationHeader = request.getHeader("Authorization");
-    if (authorizationHeader == null) {
-      throw new RuntimeException("Token JWT não enviado no cabecalho Authorization!");
+    if (authorizationHeader != null){
+      return authorizationHeader.replace("Bearer ", "");
     }
 
-    return authorizationHeader.replace("Bearer ", "");
+    return null;
   }
       
 }
