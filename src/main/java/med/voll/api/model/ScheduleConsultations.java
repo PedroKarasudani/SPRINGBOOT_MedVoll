@@ -28,15 +28,16 @@ public class ScheduleConsultations {
       throw new ExceptionValidation("Id doctor informado não existe!");
     }
 
-    var doctor = chooseDoctor(data)
-    var doctor = doctorRepository.findById(data.idDoctor()).get();
-    var patient = patientRepository.findById(data.idPatient()).get();
+    var doctor = chooseDoctor(data);
+    var patient = patientRepository.getReferenceById(data.idPatient());
     
     var consultation = new Consultation(null, doctor, patient, data.date());
     consultationRepository.save(consultation);
   }
 
   private Doctor chooseDoctor(ScheduleDataConsultation data) {
-    
+    if(data.idDoctor() != null){
+      return doctorRepository.getReferenceById(data.idDoctor());
+    }
   }
 }
