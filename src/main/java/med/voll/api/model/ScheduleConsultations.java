@@ -39,5 +39,11 @@ public class ScheduleConsultations {
     if(data.idDoctor() != null){
       return doctorRepository.getReferenceById(data.idDoctor());
     }
+
+    if(data.specialty() == null){
+      throw new ExceptionValidation("Especialidade é obrigatoria quando medico não é escolhido!"); 
+    }
+
+    return doctorRepository.chooseRandomDoctorInDate(data.specialty(), data.date());
   }
 }
