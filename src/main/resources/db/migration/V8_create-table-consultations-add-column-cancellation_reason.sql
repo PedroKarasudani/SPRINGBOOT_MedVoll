@@ -1,0 +1,1 @@
+alter table consultations add column reason_cancellation varchar(100);

@@ -1,4 +1,4 @@
-package med.voll.api.Infra.security;
+package med.voll.api.dto.Infra.security;
 
 import java.io.IOException;
 

@@ -3,7 +3,10 @@ package med.voll.api.model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import med.voll.api.dto.consultas.ScheduleDataConsultation;
+import jakarta.validation.Valid;
+import jakarta.validation.ValidationException;
+import med.voll.api.dto.consultation.CancelDataConsultation;
+import med.voll.api.dto.consultation.ScheduleDataConsultation;
 import med.voll.api.repository.ConsultationRepository;
 import med.voll.api.repository.DoctorRepository;
 import med.voll.api.repository.PatientRepository;
@@ -31,7 +34,7 @@ public class ScheduleConsultations {
     var doctor = chooseDoctor(data);
     var patient = patientRepository.getReferenceById(data.idPatient());
     
-    var consultation = new Consultation(null, doctor, patient, data.date());
+    var consultation = new Consultation(null, doctor, patient, data.date(), null);
     consultationRepository.save(consultation);
   }
 
@@ -45,5 +48,13 @@ public class ScheduleConsultations {
     }
 
     return doctorRepository.chooseRandomDoctorInDate(data.specialty(), data.date());
+  }
+
+  public void cancel(@Valid CancelDataConsultation data) {
+    if (!consultationRepository.existsById(data.idConsutation())){
+      throw new ValidationException("Id da consulta informado não existe!");
+    }
+    var consultation = consultationRepository.getReferenceById(data.idConsutation());
+    consultation.cancel(data.reason());
   }
 }
