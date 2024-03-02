@@ -15,21 +15,21 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     Page<Doctor> findAllByActiveTrue(Pageable pagination);
 
 
-    @Query("""
-            SELECT d FROM Doctor d
-            WHERE
-            d.active = 1
-            AND
-            d.specialty = :specialty
-            AND
-            d.id not in(
-                SELECT c.doctor.id FROM Consultation c
-                WHERE
-                c.date = :date
-            )
-            ORDER BY RAND()
-            LIMIT 1
-            """)
-    Doctor chooseRandomDoctorInDate(Specialty specialty, LocalDateTime date);
+    // @Query("""
+    //         SELECT d FROM Doctor d
+    //         WHERE
+    //         d.active = 1
+    //         AND
+    //         d.specialty = :specialty
+    //         AND
+    //         d.id not in(
+    //             SELECT c.doctor.id FROM Consultation c
+    //             WHERE
+    //             c.date = :date
+    //         )
+    //         ORDER BY RAND()
+    //         LIMIT 1
+    //         """)
+    // Doctor chooseRandomDoctorInDate(Specialty specialty, LocalDateTime date);
 
 }
