@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 import med.voll.api.dto.consultation.CancellationReason;
 
 @Table(name = "consultations")
-@Entity(name = "consultation")
+@Entity(name = "Consultation")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor

@@ -17,7 +17,7 @@ import med.voll.api.dto.doctor.Specialty;
 import med.voll.api.dto.doctor.UpdateDataDoctor;
 
 @Table(name = "doctors")
-@Entity(name = "Doctors")
+@Entity(name = "Doctor")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
