@@ -1,4 +1,4 @@
-package med.voll.api.model;
+package med.voll.api.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,6 +7,10 @@ import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import med.voll.api.dto.consultation.CancelDataConsultation;
 import med.voll.api.dto.consultation.ScheduleDataConsultation;
+import med.voll.api.model.Consultation;
+import med.voll.api.model.Doctor;
+import med.voll.api.model.ExceptionValidation;
+import med.voll.api.model.Patient;
 import med.voll.api.repository.ConsultationRepository;
 import med.voll.api.repository.DoctorRepository;
 import med.voll.api.repository.PatientRepository;

@@ -14,7 +14,7 @@ import med.voll.api.dto.patient.RegistrationDataPatient;
 import med.voll.api.dto.patient.UpdateDataPatient;
 
 @Table(name = "patients")
-@Entity(name = "Patients")
+@Entity(name = "Patient")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
