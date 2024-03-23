@@ -2,11 +2,15 @@ package med.voll.api.Service.validations;
 
 import java.time.DayOfWeek;
 
+import org.springframework.stereotype.Component;
+
 import jakarta.validation.ValidationException;
 import med.voll.api.dto.consultation.ScheduleDataConsultation;
 
-public class validatorClinicOpeningHours {
+@Component
+public class validatorClinicOpeningHours implements validatorSchedulingConsultation{
 
+  
   public void validation(ScheduleDataConsultation data){
     var dateConsultation = data.date();
 

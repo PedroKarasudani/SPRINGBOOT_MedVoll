@@ -1,13 +1,16 @@
 package med.voll.api.Service.validations;
 
-import java.time.LocalDateTime;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import jakarta.validation.ValidationException;
 import med.voll.api.dto.consultation.ScheduleDataConsultation;
 import med.voll.api.repository.ConsultationRepository;
 
-public class validatorDoctorInConsultationAtTheSameTime {
+@Component
+public class validatorDoctorInConsultationAtTheSameTime implements validatorSchedulingConsultation{
 
+  @Autowired
   private ConsultationRepository consultationRepository;
 
   public void validation(ScheduleDataConsultation data){

@@ -3,10 +3,13 @@ package med.voll.api.Service.validations;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import org.springframework.stereotype.Component;
+
 import jakarta.validation.ValidationException;
 import med.voll.api.dto.consultation.ScheduleDataConsultation;
 
-public class validatorAntecedentTime {
+@Component
+public class validatorAntecedentTime implements validatorSchedulingConsultation {
   
     public void validation(ScheduleDataConsultation data){
       var dateConsultation = data.date();
