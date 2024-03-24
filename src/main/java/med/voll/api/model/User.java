@@ -17,6 +17,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/*
+adicionar usuartio
+insert into users values (1, 'ana.souza@voll.med', '$2a$10$Y50UaMFOxteibQEYLrwuHeehHYfcoafCopUazP12.rqB41bsolF5.'); */
+
 @Table(name = "users")
 @Entity(name = "User")
 @Getter
