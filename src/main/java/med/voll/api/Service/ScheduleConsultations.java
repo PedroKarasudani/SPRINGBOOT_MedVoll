@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import med.voll.api.Service.validations.validatorSchedulingConsultation;
 import med.voll.api.dto.consultation.CancelDataConsultation;
+import med.voll.api.dto.consultation.DetailingDataConsultation;
 import med.voll.api.dto.consultation.ScheduleDataConsultation;
 import med.voll.api.model.Consultation;
 import med.voll.api.model.Doctor;
@@ -32,7 +33,7 @@ public class ScheduleConsultations {
   @Autowired
   private List<validatorSchedulingConsultation> validators;
 
-  public void toSchedule(ScheduleDataConsultation data){
+  public DetailingDataConsultation toSchedule(ScheduleDataConsultation data){
     if (!patientRepository.existsById(data.idPatient())) {
       throw new ExceptionValidation("Id paciente informado não existe!");
     }
@@ -47,6 +48,8 @@ public class ScheduleConsultations {
     
     var consultation = new Consultation(null, doctor, patient, data.date(), null);
     consultationRepository.save(consultation);
+
+    return new DetailingDataConsultation(consultation);
   }
 
   private Doctor chooseDoctor(ScheduleDataConsultation data) {

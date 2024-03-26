@@ -3,8 +3,8 @@ package med.voll.api.Service.validations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jakarta.validation.ValidationException;
 import med.voll.api.dto.consultation.ScheduleDataConsultation;
+import med.voll.api.model.ExceptionValidation;
 import med.voll.api.repository.ConsultationRepository;
 
 @Component
@@ -18,7 +18,7 @@ public class validatorPatientWithoutAnotherDateOnTheSameDay implements validator
       var lastTime = data.date().withHour(18);
       var patientItHasConsultation = consultationRepository.existsByPatientIdAndDateBetween(data.idPatient(),firstTime,lastTime);
       if (patientItHasConsultation) {
-        throw new ValidationException("Paciente ja possui uma consulta agendada nesse dia");
+        throw new ExceptionValidation("Paciente ja possui uma consulta agendada nesse dia");
       }
   }
 }

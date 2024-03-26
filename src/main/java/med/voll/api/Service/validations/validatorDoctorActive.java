@@ -3,8 +3,8 @@ package med.voll.api.Service.validations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jakarta.validation.ValidationException;
 import med.voll.api.dto.consultation.ScheduleDataConsultation;
+import med.voll.api.model.ExceptionValidation;
 import med.voll.api.repository.DoctorRepository;
 
 @Component
@@ -21,7 +21,7 @@ public class validatorDoctorActive implements validatorSchedulingConsultation{
 
     var doctorIsActive = doctorRepository.findActiveById(data.idDoctor());
     if (!doctorIsActive) {
-      throw new ValidationException("Consulta nao pode ser agendada com o medico excluido");
+      throw new ExceptionValidation("Consulta nao pode ser agendada com o medico excluido");
     }
   }
 }
