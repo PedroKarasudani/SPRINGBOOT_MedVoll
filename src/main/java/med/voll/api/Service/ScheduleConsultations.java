@@ -45,6 +45,10 @@ public class ScheduleConsultations {
 
     var doctor = chooseDoctor(data);
     var patient = patientRepository.getReferenceById(data.idPatient());
+
+    if (doctor == null) {
+      throw new ExceptionValidation("Não existe medico disponivel nessa data!");
+    }
     
     var consultation = new Consultation(null, doctor, patient, data.date(), null);
     consultationRepository.save(consultation);
